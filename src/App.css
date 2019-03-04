@@ -1,33 +1,26 @@
-.App {
-  text-align: center;
+.vgmNavLogo img {
+  height: 30px;
+  padding-right: 10px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.nav-wrapper {
+  padding-right: 20px;
+  padding-left: 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+nav .nav-wrapper {
+  height: unset;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media only screen and (max-width: 600px) {
+  .myNavItem {
+    text-align: center;
   }
-  to {
-    transform: rotate(360deg);
+  .myNavItem a {
+    justify-content: center;
+  }
+
+  .mainHeader {
+    margin-top: 64px;
   }
 }

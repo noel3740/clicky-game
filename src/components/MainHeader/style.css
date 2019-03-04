@@ -1,0 +1,15 @@
+.mainHeader {
+    padding-top: 30px;
+    padding-bottom: 60px;
+    background-image: url(./controller.jpg);
+    background-repeat: no-repeat;
+    background-size: 300px;
+    background-position: left;
+    background-color: #bdcdcd;
+}
+
+@media only screen and (max-width: 992px) {
+    .mainHeader {
+        background-position: top;
+    }
+}
