@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/clicky-game/static/media/luigi.6c2cfaeb.png"
   },
   {
-    "revision": "9497c2e53d861b50ef05",
+    "revision": "5f69349c24f2416e007e",
     "url": "/clicky-game/static/css/main.c81a6810.chunk.css"
   },
   {
@@ -36,8 +36,8 @@ self.__precacheManifest = [
     "url": "/clicky-game/static/media/godOfWar.21c9e3e4.jpg"
   },
   {
-    "revision": "9497c2e53d861b50ef05",
-    "url": "/clicky-game/static/js/main.9497c2e5.chunk.js"
+    "revision": "5f69349c24f2416e007e",
+    "url": "/clicky-game/static/js/main.5f69349c.chunk.js"
   },
   {
     "revision": "e9c222f92f0b594df640c891f5ddf970",
@@ -72,7 +72,7 @@ self.__precacheManifest = [
     "url": "/clicky-game/static/media/zelda.150b52e8.jpg"
   },
   {
-    "revision": "4a87c133496a4792f148e8789a50a984",
+    "revision": "1d1c1ca62a9dfa23eccea8636dd76614",
     "url": "/clicky-game/index.html"
   }
 ];
