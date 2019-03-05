@@ -7,8 +7,7 @@ import logo from './logo.png'
 class App extends Component {
   state = {
     score: 0,
-    topScore: 0,
-    message: ""
+    topScore: 0
   };
 
   imagesSelected = [];
@@ -23,33 +22,46 @@ class App extends Component {
 
   //Function that will handle the on click when a user clicks on a card
   handleOnCardClick = imageUrl => {
+    let message = "";
+
     if (!this.imagesSelected.includes(imageUrl)) {
       this.imagesSelected.push(imageUrl);
 
       if (this.imagesSelected.length === this.images.length) {
         this.imagesSelected = [];
+        message = "You won!";
+
         this.setState(state => ({
           topScore: this.images.length,
-          score: 0,
-          message: "You won!"
+          score: 0
         }));
       } else {
+        message = "You guessed correctly!";
+
         this.setState(state => ({
-          message: "You guessed correctly!",
           score: state.score + 1
         }));
       }
     } else {
       this.imagesSelected = [];
+      message = "You guessed incorrectly!";
+
       this.setState(state => ({
         topScore: state.score > state.topScore ? state.score : state.topScore,
-        score: 0,
-        message: "You guessed incorrectly!"
+        score: 0
       }));
     }
 
+    //Display a toast on screen with the message of if they guessed correctlym incorrectly, or if they won
+    const toastClass = message.includes("incorrectly") ? "incorrectToast" : (message.includes("won") ? "wonToast" : "correctToast");
+
+    window.M.toast({
+      html: message,
+      classes: toastClass
+    });
+
     //Randomize the images
-    this.images = this.images.sort( () => Math.random() - 0.5);
+    this.images = this.images.sort(() => Math.random() - 0.5);
   };
 
   render() {
@@ -61,13 +73,10 @@ class App extends Component {
           <nav>
             <div className="nav-wrapper black">
               <div className="row">
-                <div className="col s12 m4 left-align myNavItem">
-                  <a href="#!" className="vgmNavLogo valign-wrapper"><img src={logo} alt="logo"></img> VGM</a>
+                <div className="col s12 m6 left-align myNavItem">
+                  <img className="vgmNavLogo" src={logo} alt="logo"></img> VGM
                 </div>
-                <div className="col s12 m4 center-align myNavItem">
-                  <h5 style={this.state.message.includes("incorrectly") ? {color: "red"} : this.state.message.includes(" won")  ? {color: "green"} : {}}>{this.state.message}</h5>
-                </div>
-                <div className="col s12 m4 right-align myNavItem">
+                <div className="col s12 m6 right-align myNavItem">
                   <span>Score: {this.state.score}, </span>
                   <span>Top Score: {this.state.topScore}</span>
                 </div>

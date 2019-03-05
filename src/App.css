@@ -1,4 +1,4 @@
-.vgmNavLogo img {
+.vgmNavLogo {
   height: 30px;
   padding-right: 10px;
 }
@@ -10,17 +10,31 @@
 
 nav .nav-wrapper {
   height: unset;
+  font-size: 25px;
+}
+
+.incorrectToast {
+  background-color: red;
+}
+
+.wonToast {
+  background-color: green;
+}
+
+.correctToast {
+  background-color: blue;
+}
+
+.toast {
+  font-size: 30px;
 }
 
 @media only screen and (max-width: 600px) {
   .myNavItem {
     text-align: center;
   }
-  .myNavItem a {
-    justify-content: center;
-  }
-
+  
   .mainHeader {
-    margin-top: 64px;
+    margin-top: 15px;
   }
 }
