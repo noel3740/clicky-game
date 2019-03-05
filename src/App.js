@@ -3,13 +3,14 @@ import MainHeader from './components/MainHeader'
 import Card from './components/Card'
 import Nav from './components/Nav'
 import './App.css';
+import GiphyAPIService from './services/GiphyAPIService'
 
 class App extends Component {
   state = {
     score: 0,
     topScore: 0
   };
-
+  
   imagesSelected = [];
 
   //Function that will require all the images into the code
@@ -35,6 +36,12 @@ class App extends Component {
           topScore: this.images.length,
           score: 0
         }));
+
+        //Display random video game gif
+        GiphyAPIService.getRandomPicture("video game")
+        .then(res => {
+          console.log(res.data.data.image_url);
+        });
       } else {
         message = "You guessed correctly!";
 
