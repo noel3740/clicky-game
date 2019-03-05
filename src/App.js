@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import MainHeader from './components/MainHeader'
 import Card from './components/Card'
+import Nav from './components/Nav'
 import './App.css';
-import logo from './logo.png'
 
 class App extends Component {
   state = {
@@ -69,21 +69,10 @@ class App extends Component {
     return (
       <div className="App">
 
-        <div className="navbar-fixed">
-          <nav>
-            <div className="nav-wrapper black">
-              <div className="row">
-                <div className="col s12 m6 left-align myNavItem">
-                  <img className="vgmNavLogo" src={logo} alt="logo"></img> VGM
-                </div>
-                <div className="col s12 m6 right-align myNavItem">
-                  <span>Score: {this.state.score}, </span>
-                  <span>Top Score: {this.state.topScore}</span>
-                </div>
-              </div>
-            </div>
-          </nav>
-        </div>
+        <Nav 
+          score={this.state.score}
+          topScore={this.state.topScore}
+          />
 
         <MainHeader
           mainText="Video Game Memory"
@@ -93,10 +82,9 @@ class App extends Component {
         <div className="container">
           <div className="row">
 
-            {this.images.map((image, index) =>
+            {this.images.map(image =>
               <Card
-                cardId={index}
-                key={index}
+                key={image}
                 imageUrl={image}
                 imageText="test"
                 onClickMethod={this.handleOnCardClick} />

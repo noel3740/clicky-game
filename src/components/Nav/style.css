@@ -1,0 +1,20 @@
+.vgmNavLogo {
+    height: 30px;
+    padding-right: 10px;
+  }
+  
+  .nav-wrapper {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+  
+  nav .nav-wrapper {
+    height: unset;
+    font-size: 25px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .myNavItem {
+      text-align: center;
+    }
+  }
