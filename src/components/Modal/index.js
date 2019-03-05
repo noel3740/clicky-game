@@ -7,7 +7,7 @@ class Modal extends React.Component {
     componentDidMount() {
         //Initialize the materialize modal so it can be used later
         var modalElement = document.getElementById(this.props.id);
-        window.M.Modal.init(modalElement, {endingTop: 20});
+        window.M.Modal.init(modalElement, {endingTop: 20, onCloseEnd: this.props.onCloseEnd});
         this.modalInstance = window.M.Modal.getInstance(modalElement);
     };
 
