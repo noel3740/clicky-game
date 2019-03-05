@@ -25,6 +25,22 @@ class App extends Component {
   //Get all images that are in the cardImages folder
   images = this.requireAll(require.context('./cardImages', false, /\.(png|jpe?g|svg)$/));
 
+  //Function that will set the modal gif info
+  setModalGif = () => {
+    GiphyAPIService.getRandomPicture("winning")
+      .then(res => {
+        this.setState({
+          winGif: res.data.data.image_url,
+          winGifText: res.data.data.title
+        });
+      });
+  };
+
+  componentDidMount = () => {
+    //Get a modal gif to display initially
+    this.setModalGif();
+  };
+
   //Function that will handle the on click when a user clicks on a card
   handleOnCardClick = imageUrl => {
     let message = "";
@@ -44,18 +60,9 @@ class App extends Component {
           score: 0
         });
 
-        //Display a random gif in a modal popup
-        GiphyAPIService.getRandomPicture("winning")
-          .then(res => {
-            this.setState({
-              winGif: res.data.data.image_url,
-              winGifText: res.data.data.title
-            }, () => {
-              //Open the win modal
-              this.winModal.displayModal();
-            });
-          });
-      } 
+        //Open the win modal
+        this.winModal.displayModal();
+      }
       //User has not won but has guessed correctly
       else {
         message = "You guessed correctly!";
@@ -65,7 +72,7 @@ class App extends Component {
           score: state.score + 1
         }));
       }
-    } 
+    }
     //User has guessed incorrectly
     else {
       this.imagesSelected = [];
@@ -77,7 +84,7 @@ class App extends Component {
         score: 0
       }));
 
-      window.$("#cardContainer").effect( "shake" )
+      window.$("#cardContainer").effect("shake")
     }
 
     //Display a toast on screen with the message of if they guessed correctly, incorrectly, or if they won
@@ -138,7 +145,8 @@ class App extends Component {
           header="You Won!"
           imageUrl={this.state.winGif}
           imageText={this.state.winGifText}
-          ref={ref => { this.winModal = ref }} />
+          ref={ref => { this.winModal = ref }}
+          onCloseEnd={ this.setModalGif } />
       </div>
     );
   }
