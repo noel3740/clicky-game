@@ -1,3 +1,29 @@
+# Video Game Memory
+
+This is a single page video game themed memory game built using React, Node, Axios, Materialize, JQuery, and JQuery UI. The point of the game is to click on as many unique images as possible. Each time an image is selected the image cards will randomly shuffle. To win the user will need to guess all unique images without selecting an image they have previously selected. If an image was previously selected then the game will start over resetting the user's score back to 0 and updating the Top Score where appropriate. 
+
+The project is deployed [here](https://noel3740.github.io/clicky-game/).
+
+# Steps to Play
+
+1. To start playing simply selecting an image. 
+
+![](screenshots/mainScreen.jpg "Screenshot of Main Screen")
+
+2. Continue selecting images being careful to only select those that have not previously been selected. Toast messages will appear as you select images letting you know if you have correctly guessed a unique image or not. The users score will also increate if they have guessed correctly. 
+
+![](screenshots/correctCard.gif "Gif of selecting correct cards")
+
+3. After selecting an incorrect image then the top score will update if the user's score was their best score in their current session. 
+
+![](screenshots/incorrectCard.gif "Gif of selecting incorrect cards")
+
+4. If all unique images have been selected then a toast will appear notifying the user that they have won as well as a modal will pop up with a random gif. 
+
+![](screenshots/win.gif "Gif of a user winning")
+
+# Create React App Setup
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
