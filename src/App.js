@@ -2,16 +2,20 @@ import React, { Component } from 'react';
 import MainHeader from './components/MainHeader'
 import Card from './components/Card'
 import Nav from './components/Nav'
+import Modal from './components/Modal'
 import './App.css';
 import GiphyAPIService from './services/GiphyAPIService'
 
 class App extends Component {
   state = {
     score: 0,
-    topScore: 0
+    topScore: 0,
+    winGif: "",
+    winGifText: ""
   };
-  
+
   imagesSelected = [];
+  winModal;
 
   //Function that will require all the images into the code
   requireAll = requireContext => {
@@ -32,16 +36,22 @@ class App extends Component {
         this.imagesSelected = [];
         message = "You won!";
 
-        this.setState(state => ({
+        this.setState({
           topScore: this.images.length,
           score: 0
-        }));
+        });
 
         //Display random video game gif
-        GiphyAPIService.getRandomPicture("video game")
-        .then(res => {
-          console.log(res.data.data.image_url);
-        });
+        GiphyAPIService.getRandomPicture("winning")
+          .then(res => {
+            this.setState({
+              winGif: res.data.data.image_url,
+              winGifText: res.data.data.title
+            }, () => {
+              //Open the win modal
+              this.winModal.displayModal();
+            });
+          });
       } else {
         message = "You guessed correctly!";
 
@@ -76,10 +86,10 @@ class App extends Component {
     return (
       <div className="App">
 
-        <Nav 
+        <Nav
           score={this.state.score}
           topScore={this.state.topScore}
-          />
+        />
 
         <MainHeader
           mainText="Video Game Memory"
@@ -100,6 +110,12 @@ class App extends Component {
           </div>
         </div>
 
+        <Modal
+          id="winModal"
+          header="You Won!"
+          imageUrl={this.state.winGif}
+          imageText={this.state.winGifText}
+          ref={ref => { this.winModal = ref }} />
       </div>
     );
   }
