@@ -29,19 +29,22 @@ class App extends Component {
   handleOnCardClick = imageUrl => {
     let message = "";
 
+    //User has guessed correctly
     if (!this.imagesSelected.includes(imageUrl)) {
       this.imagesSelected.push(imageUrl);
 
+      //User has won
       if (this.imagesSelected.length === this.images.length) {
         this.imagesSelected = [];
         message = "You won!";
 
+        //Set the state variables
         this.setState({
           topScore: this.images.length,
           score: 0
         });
 
-        //Display random video game gif
+        //Display a random gif in a modal popup
         GiphyAPIService.getRandomPicture("winning")
           .then(res => {
             this.setState({
@@ -52,24 +55,32 @@ class App extends Component {
               this.winModal.displayModal();
             });
           });
-      } else {
+      } 
+      //User has not won but has guessed correctly
+      else {
         message = "You guessed correctly!";
 
+        //Set the state
         this.setState(state => ({
           score: state.score + 1
         }));
       }
-    } else {
+    } 
+    //User has guessed incorrectly
+    else {
       this.imagesSelected = [];
       message = "You guessed incorrectly!";
 
+      //Set the state
       this.setState(state => ({
         topScore: state.score > state.topScore ? state.score : state.topScore,
         score: 0
       }));
+
+      window.$("#cardContainer").effect( "shake" )
     }
 
-    //Display a toast on screen with the message of if they guessed correctlym incorrectly, or if they won
+    //Display a toast on screen with the message of if they guessed correctly, incorrectly, or if they won
     const toastClass = message.includes("incorrectly") ? "incorrectToast" : (message.includes("won") ? "wonToast" : "correctToast");
 
     window.M.toast({
@@ -78,7 +89,19 @@ class App extends Component {
     });
 
     //Randomize the images
-    this.images = this.images.sort(() => Math.random() - 0.5);
+    this.images = this.randomizeArray(this.images); //this.images.sort(() => Math.random() - 0.5);
+  };
+
+  randomizeArray = originalArray => {
+    const newArray = [];
+    const tempArray = [...originalArray];
+
+    originalArray.forEach(() => {
+      const randomIndex = Math.floor(Math.random() * tempArray.length);
+      newArray.push(tempArray.splice(randomIndex, 1)[0]);
+    });
+
+    return newArray;
   };
 
   render() {
@@ -96,7 +119,7 @@ class App extends Component {
           detailText="Click on a video game image to earn points, but don't click on any more than once!"
         />
 
-        <div className="container">
+        <div id="cardContainer" className="container">
           <div className="row">
 
             {this.images.map(image =>
